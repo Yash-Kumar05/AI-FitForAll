@@ -1,15 +1,24 @@
-import os
 import streamlit as st
 import pandas as pd
 import sqlite3
 from datetime import date
-from groq import Groq
 from fpdf import FPDF
+
+
+try:
+    from groq import Groq
+except:
+    st.error("❌ Groq module not installed")
+    st.stop()
+
 
 GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 
-client = Groq(api_key=GROQ_API_KEY)
+if not GROQ_API_KEY:
+    st.error("❌ GROQ_API_KEY not found")
+    st.stop()
 
+client = Groq(api_key=GROQ_API_KEY)
 # ================= PAGE CONFIG =================
 st.set_page_config(page_title="AI FitForAll", layout="wide")
 
