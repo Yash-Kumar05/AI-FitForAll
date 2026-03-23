@@ -3,17 +3,10 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 from datetime import date
-from dotenv import load_dotenv
 from groq import Groq
 from fpdf import FPDF
 
-# ================= LOAD ENV =================
-load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
-if not GROQ_API_KEY:
-    st.error("❌ GROQ_API_KEY not found")
-    st.stop()
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 
 client = Groq(api_key=GROQ_API_KEY)
 
